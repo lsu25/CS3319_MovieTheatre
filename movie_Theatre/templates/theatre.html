@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://www.freeiconspng.com/uploads/movie-icon-27.png">
+	
+	<title>Theatre Room</title>
+	
+	<!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+    <!-- Bootstrap theme -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+	
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+
+<script type="text/javascript">
+function showTable(){
+  if({{ AddRoom }}){
+	document.getElementById("updateRooms").style.display="none";
+	document.getElementById("listRooms").style.display="none";
+	document.getElementById("deleteRooms").style.display="none";
+  }
+  else if ({{ EditRoom }}){
+    document.getElementById("addRooms").style.display="none";
+	document.getElementById("listRooms").style.display="none";
+	document.getElementById("deleteRooms").style.display="none";
+  }
+  else if ({{ DeleteRoom }}){
+    document.getElementById("addRooms").style.display="none";
+	document.getElementById("updateRooms").style.display="none";
+	document.getElementById("listRooms").style.display="none";
+  }
+  else if ({{ ListRoom }}){
+    document.getElementById("addRooms").style.display="none";
+	document.getElementById("updateRooms").style.display="none";
+	document.getElementById("deleteRooms").style.display="none";
+  }
+}
+</script>
+</head>
+<body onload="showTable()">
+	
+	<div id="addRooms">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back to Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="listroom">List Rooms</a></li>
+			<li class="active"><a href="/addroom">Add Room</a></li>
+			<li><a href="editroom">Edit Room</a></li>
+            <li><a href="/deleteroom">Delete Room</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	<div class="page-header" style="margin-left:80px;">
+			<h1>Add Theatre Room</h1>
+		</div>
+	<div style="margin-left:200px;">
+	  <form action="/submitroom" method="post">
+		 RoomNumber:<br>
+		 <input type="text" name="RoomNumber"><br>
+		 Capacity:<br>
+		 <input type="text" name="Capacity"><br>
+		 <br>
+		 <input type="submit" value="Submit">
+	  </form>
+	</div>
+	</div>
+	
+	<div id="updateRooms">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back to Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="listroom">List Rooms</a></li>
+			<li><a href="/addroom">Add Room</a></li>
+			<li class="active"><a href="editroom">Edit Room</a></li>
+            <li><a href="/deleteroom">Delete Room</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	<div class="page-header" style="margin-left:80px;">
+			<h1>Edit Theatre Room</h1>
+		</div>
+	<div class="col-md-4" style="margin-left:200px;">
+	  <table class="table table-striped">
+		<tr>
+		  <th>RoomNumber</th>
+		  <th>Capacity</th>
+		  <th></th>
+		</tr>
+		{% for room in rooms %}
+		<tr>
+			<form action="/updateroom" method="post">
+				<th><input type="text" name="RoomNumber" value="{{ room.0 }}" readonly></th>
+				<th><input type="text" name="Capacity" value="{{ room.1 }}"></th>
+				<th><input type="submit" value="Update"></th>
+			</form>
+		{% endfor %}
+		</tr>
+	  </table>
+	</div>
+	</div>
+	
+	<div id="deleteRooms">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back to Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="listroom">List Rooms</a></li>
+			<li><a href="/addroom">Add Room</a></li>
+			<li><a href="editroom">Edit Room</a></li>
+            <li class="active"><a href="/deleteroom">Delete Room</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	<div class="page-header" style="margin-left:80px;">
+			<h1>Delete Teatre Room</h1>
+		</div>
+	
+	<div class="col-md-4" style="margin-left:200px;">	
+	<table class="table table-striped">
+		<tr>
+		  <th>RoomNumber</th>
+		  <th>Capacity</th>
+		  <th></th>
+		</tr>
+		{% for room in rooms %}
+		<tr>
+		  <th>{{ room.0 }}</th>
+		  <th>{{ room.1 }}</th>
+		  <th>
+		    <form action="/removeroom" method="post">
+            <input type="hidden" name="RoomNumber" value="{{ room.0 }}">
+			<input type="hidden" name="Capacity" value="{{ room.1}}">		  
+		    <input type="submit" value="Delete">
+		    </form>
+		  </th>
+		{% endfor %}
+		</tr>
+	</table>
+   </div>
+   </div>
+	
+	<div id="listRooms">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back to Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="listroom">List Rooms</a></li>
+			<li><a href="/addroom">Add Room</a></li>
+			<li><a href="editroom">Edit Room</a></li>
+            <li><a href="/deleteroom">Delete Room</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	<div class="page-header" style="margin-left:80px;">
+			<h1>List of all Theatre Rooms</h1>
+		</div>
+	<div class="col-md-4" style="margin-left:200px;">
+	<table class="table table-striped">
+		<tr>
+			<th>RoomNumber</th>
+			<th>Capacity</th>
+		</tr>
+		{% for room in rooms %}
+		<tr>
+			<th>{{ room.0 }}</th>
+			<th>{{ room.1 }}</th> 
+		{% endfor %}
+		</tr>
+	</table>
+	</div>
+	</div>
+
+ </body>
+ </html>

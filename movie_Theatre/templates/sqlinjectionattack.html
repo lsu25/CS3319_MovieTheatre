@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://www.freeiconspng.com/uploads/movie-icon-27.png">
+	
+	<title>SQL Injection attack</title>
+	
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+    <!-- Bootstrap theme -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+	
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<style>
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
+    text-align: center;
+    padding: 6px;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back to Manager</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+			<li><a href="/injectionattack">SQL Injection attack</a></li>
+            <li class="active"><a href="#">SQL Injection attack Result</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	
+	<div class="page-header" style="margin-left:80px;">
+			<h1>SQL Injection attack Results</h1>
+		</div>
+
+	<div style="margin-left:110px;">
+	<table>
+		<tr>
+			<th>CustomerID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Email</th>
+			<th>Sex</th>
+		</tr>
+		{% for customer in customers %}
+		<tr>
+			<th>{{ customer.0 }}</th>
+			<th>{{ customer.1 }}</th> 
+			<th>{{ customer.2 }}</th>
+			<th>{{ customer.3 }}</th>
+			<th>{{ customer.4 }}</th>
+		{% endfor %}
+		</tr>
+	</table>
+	</div>
+ </body>
+ </html>

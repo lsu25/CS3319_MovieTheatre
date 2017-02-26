@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://www.freeiconspng.com/uploads/movie-icon-27.png">
+	
+	<title>Woker Manager</title>
+	
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+    <!-- Bootstrap theme -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+	
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	
+	<style>
+	.new {
+		float: left;
+		margin: 10px;
+	}
+	.newrow {
+		margin: 10px;
+	}
+	</style>
+</head>
+<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Back to Movie Theatre</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="login">Login</a></li>
+			<li><a href="/nowplaying">Now Playing</a></li>
+			<li><a href="showtime">Show Time</a></li>
+            <li class="active"><a href="/manager">Manager</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+
+		<div class="page-header" style="margin-left:80px;">
+			<h1>Welcome Manager</h1>
+		</div>
+		
+		<div style="margin-left:200px;">
+		<div class="new">
+			<h3>Movies</h3>
+			<ul>
+				<li><a href="/listmovies">List Movies</a></li>
+				<li><a href="/addmovie">Add Movie</a></li>
+				<li><a href="/editmovie">Edit Movie</a></li>
+				<li><a href="/deletemovie">Delete Movie</a></li>
+				
+			</ul>
+		</div>
+		
+		<div class="new">
+			<h3>Showings</h3>
+			<ul>
+				<li><a href="/listshowings">List Showings</a></li>
+				<li><a href="/addshowing">Add Showing</a></li>
+				<li><a href="/editshowing">Edit Showing</a></li>
+				<li><a href="/deleteshowing">Delete Showing</a></li>
+				
+				
+			</ul>
+		</div>
+		
+		<div class="new">
+			<h3>Customers</h3>
+			<ul>
+				<li><a href="/listcustomers">List Customer</a></li>
+				<li><a href="/addcustomer">Add Customer</a></li>
+				<li><a href="/editcustomer">Edit Customer</a></li>
+				<li><a href="/deletecustomer">Delete Customer</a></li>
+				
+				
+			</ul>
+		</div>
+		
+		<div class="new">
+			<h3>Genres</h3>
+			<ul>
+				<li><a href="/listgenres">List Genres</a></li>
+				<li><a href="/addgenre">Add Genre</a></li>
+				<li><a href="/deletegenre">Delete Genre</a></li>
+				
+			</ul>
+		</div>
+		
+		<div class="new">
+			<h3>Rooms</h3>
+			<ul>
+				<li><a href="/listroom">List Rooms</a></li>
+				<li><a href="/addroom">Add Room</a></li>
+				<li><a href="/editroom">Edit Room</a></li>
+				<li><a href="/deleteroom">Delete Room</a></li>
+						
+			</ul>
+		</div>
+		
+		
+		
+		<div class="new">
+			<h3>Attendance</h3>
+			<ul>
+				<li><a href="/attendance">List Attendance</a></li>
+			</ul>
+		</div>
+		
+		<div class="new">
+			<h3>Maintenance</h3>
+			<ul>
+				<li><a href="/injectionattack">SQL Injection attack</a></li>
+			</ul>
+		</div>
+		<br />
+		</div>
+ </body>
+ </html>

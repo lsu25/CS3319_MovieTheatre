@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://www.freeiconspng.com/uploads/movie-icon-27.png">
+	
+	<title>Genre</title>
+	
+	<!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+    <!-- Bootstrap theme -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+	
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<style>
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 6px;
+}
+</style>
+<script type="text/javascript">
+function showTable(){
+  if({{ AddGenre }}){
+	document.getElementById("updateGenre").style.display="none";
+	document.getElementById("listGenre").style.display="none";
+	document.getElementById("deleteGenre").style.display="none";
+  }
+  else if ({{ EditGenre }}){
+    document.getElementById("addGenre").style.display="none";
+	document.getElementById("listGenre").style.display="none";
+	document.getElementById("deleteGenre").style.display="none";
+  }
+  else if ({{ DeleteGenre }}){
+    document.getElementById("addGenre").style.display="none";
+	document.getElementById("updateGenre").style.display="none";
+	document.getElementById("listGenre").style.display="none";
+  }
+  else if ({{ ListGenre }}){
+    document.getElementById("addGenre").style.display="none";
+	document.getElementById("updateGenre").style.display="none";
+	document.getElementById("deleteGenre").style.display="none";
+  }
+}
+</script>
+</head>
+<body onload="showTable()">
+	<div id="addGenre">
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back To Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+			<li><a href="/listgenres">List Genres</a></li>
+			<li class="active"><a href="/addgenre">Add Genre</a></li>
+			<li><a href="/deletegenre">Delete Genre</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	
+	  <div class="page-header" style="margin-left:80px;">
+			<h1>Add Movie Genre</h1>
+		</div>
+	<div style="margin-left:200px;">
+	  <form action="/submitgenre" method="post">
+		 MovieTitle:<br>
+		 <input type="text" name="MovieTitle"><br>
+		 Genre:<br>
+		 <input type="text" name="Genre"><br>
+		 <br>
+		 <input type="submit" value="Submit">
+	  </form>
+	  </div>
+	</div>
+	
+	<div id="updateGenre">
+	  <div class="page-header" style="margin-left:80px;">
+			<h1>Update Movie Genre</h1>
+		</div>
+	<div style="margin-left:200px;">
+	  <table>
+		<tr>
+		  <th>MovieTitle</th>
+		  <th>Genre</th>
+		  <th></th>
+		</tr>
+		{% for genre in genres %}
+		<tr>
+			<form action="/updateroom" method="post">
+				<th><input type="text" name="MovieTitle" value="{{ genre.0 }}" readonly></th>
+				<th><input type="text" name="Genre" value="{{ genre.1 }}"></th>
+				<input type="hidden" name="MovieID" value="{{ genre.2 }}">
+				<th><input type="submit" value="Update"></th>
+			</form>
+		{% endfor %}
+		</tr>
+	  </table>
+	</div>
+	</div>
+	
+	<div id="deleteGenre">
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back To Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+			<li><a href="/listgenres">List Genres</a></li>
+			<li><a href="/addgenre">Add Genre</a></li>
+			<li class="active"><a href="/deletegenre">Delete Genre</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	
+	<div class="page-header" style="margin-left:80px;">
+			<h1>Delete Movie Genre</h1>
+		</div>
+
+	<div style="margin-left:200px;">
+	<table>
+		<tr>
+		  <th>MovieTitle</th>
+		  <th>Genre</th>
+		  <th></th>
+		</tr>
+		{% for genre in genres %}
+		<tr>
+		  <th>{{ genre.0 }}</th>
+		  <th>{{ genre.1 }}</th>
+		  <th>
+		    <form action="/removegenre" method="post">
+			<input type="hidden" name="Genre" value="{{ genre.1 }}">	
+			<input type="hidden" name="MovieID" value="{{ genre.2 }}">				
+		    <input type="submit" value="Delete">
+		    </form>
+		  </th>
+		{% endfor %}
+		</tr>
+	</table>
+   </div>
+   </div>
+	
+	<div id="listGenre">
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back To Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+			<li class="active"><a href="/listgenres">List Genres</a></li>
+			<li><a href="/addgenre">Add Genre</a></li>
+			<li><a href="/deletegenre">Delete Genre</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	
+	<div class="page-header" style="margin-left:80px;">
+			<h1>List of All Movie Genres</h1>
+		</div>
+		
+	<div style="margin-left:200px;">
+	<table>
+		<tr>
+			<th>MovieTitle</th>
+			<th>Genre</th>
+		</tr>
+		{% for genre in genres %}
+		<tr>
+			<th>{{ genre.0 }}</th>
+			<th>{{ genre.1 }}</th> 
+		{% endfor %}
+		</tr>
+	</table>
+	</div>
+	</div>
+	
+ </body>
+ </html>

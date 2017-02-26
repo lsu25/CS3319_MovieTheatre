@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://www.freeiconspng.com/uploads/movie-icon-27.png">
+
+	<title>Theatre Manager</title>
+	
+	<!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+    <!-- Bootstrap theme -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+	
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	
+<style>
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
+    text-align: center;
+    padding: 6px;
+}
+</style>
+</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">Back to Movie Theatre</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/login">Login</a></li>
+						<li class="active"><a href="/nowplaying">Now Playing</a></li>
+						<li><a href="/showtime">Show Time</a></li>
+						<li><a href="/manager">Manager</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</nav><br /><br /><br />
+	
+	<div class="page-header" style="margin-left:80px;">
+			<h1>List of All Playing Movies</h1>
+	</div>
+
+	<div class="col-md-6" style="margin-left:300px;">
+	<table class="table table-striped">
+		<tr>
+			<th>MovieID</th>
+			<th>Title</th>
+			<th>Year</th>
+		</tr>
+		{% for movie in movies %}
+		<tr>
+			<th>{{ movie.0 }}</th>
+			<th>{{ movie.1 }}</th> 
+			<th>{{ movie.2 }}</th>
+		{% endfor %}
+		</tr>
+	</table>
+	</div>
+ </body>
+ </html>

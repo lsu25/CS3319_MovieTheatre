@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://www.freeiconspng.com/uploads/movie-icon-27.png">
+	
+	<title>Showing</title>
+	
+	<!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+    <!-- Bootstrap theme -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+	
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	
+<style>
+table {
+    border-collapse: collapse;
+	table-layout:fixed;
+}
+
+td, th {
+    border: 1px solid black;
+    text-align: center;
+    padding: 6px;
+	overflow:hidden;
+}
+</style>
+<script type="text/javascript">
+function showTable(){
+  if({{ AddShowing }}){
+	document.getElementById("updateShowings").style.display="none";
+	document.getElementById("listShowings").style.display="none";
+	document.getElementById("deleteShowings").style.display="none";
+	document.getElementById("showsTime").style.display="none";
+  }
+  else if ({{ EditShowing }}){
+    document.getElementById("addShowings").style.display="none";
+	document.getElementById("listShowings").style.display="none";
+	document.getElementById("deleteShowings").style.display="none";
+	document.getElementById("showsTime").style.display="none";
+  }
+  else if ({{ DeleteShowing }}){
+    document.getElementById("addShowings").style.display="none";
+	document.getElementById("updateShowings").style.display="none";
+	document.getElementById("listShowings").style.display="none";
+	document.getElementById("showsTime").style.display="none";
+  }
+  else if ({{ ListShowing }}){
+    document.getElementById("addShowings").style.display="none";
+	document.getElementById("updateShowings").style.display="none";
+	document.getElementById("deleteShowings").style.display="none";
+	document.getElementById("showsTime").style.display="none";
+  }
+  else if ({{ ShowTime }}){
+    document.getElementById("listShowings").style.display="none";
+	document.getElementById("addShowings").style.display="none";
+	document.getElementById("updateShowings").style.display="none";
+	document.getElementById("deleteShowings").style.display="none";	
+  }
+}
+</script>
+</head>
+<body onload="showTable()">
+	<div id="addShowings">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back To Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+			<li><a href="/listshowings">List Showings</a></li>
+			<li class="active"><a href="/addshowing">Add Showing</a></li>
+			<li><a href="/editshowing">Edit Showing</a></li>
+			<li><a href="/deleteshowing">Delete Showing</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	
+	<div class="page-header" style="margin-left:80px;">
+		<h1>Add Showing</h1>
+	</div>
+	<div align="center"> 
+    <div style="margin-left:300px;">
+	  <form action="/submitshowing" method="post" style="float: left; margin-right: 100px;">
+		 ShowingDateTime<br>
+		 (YYYY-MM-DD HH:MM:SS):<br>
+		 <input type="text" name="ShowingDateTime"><br>
+		 MovieID:<br>
+		 <input type="text" name="Movie_idMovie"><br>
+		 TheatreRoom Number:<br>
+		 <input type="text" name="TheatreRoom"><br>
+		 Price:<br>
+		 <input type="text" name="Price"><br>
+		 <br>
+		 <input type="submit" value="Submit">
+	  </form>
+	  <div class="row">
+        <div class="col-md-4">
+          <table class="table table-bordered">
+	  
+		<tr>
+			<th>MovieID</th>
+			<th>MovieTitle</th>
+		</tr>
+		{% for movie in movies %}
+		<tr>
+			<th style="padding: 1px; font-size:80%;">{{ movie.0 }}</th>
+			<th style="padding: 1px; font-size:80%;">{{ movie.1 }}</th>
+		{% endfor %}
+		</tr>
+	  </table>
+	  </div>
+	  <div class="col-md-3">
+	  <table class="table table-bordered">
+		<tr>
+			<th>TheatreRoomNumber</th>
+			<th>Capacity</th>
+		</tr>
+		{% for room in rooms %}
+		<tr>
+			<th style="padding: 1px; font-size:80%;">{{ room.0 }}</th>
+			<th style="padding: 1px; font-size:80%;">{{ room.1 }}</th>
+		{% endfor %}
+		</tr>
+	  </table>
+	  </div>
+	  </div>
+	</div>
+	</div>
+	</div>
+	
+	<div id="updateShowings">
+	
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back To Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+			<li><a href="/listshowings">List Showings</a></li>
+			<li><a href="/addshowing">Add Showing</a></li>
+			<li class="active"><a href="/editshowing">Edit Showing</a></li>
+			<li><a href="/deleteshowing">Delete Showing</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+		
+	  <div class="page-header" style="margin-left:80px;">
+		<h1>Edit Showing</h1>
+	  </div>
+	  
+	  <div class="row">
+        <div class="col-md-7">
+          <table class="table">
+		<tr>
+		  <th>ShowingDateTime <br>(YYYY-MM-DD HH:MM:SS)</th>
+		  <th>MovieID</th>
+		  <th>TheatreRoomNumber</th>
+		  <th>Price</th>
+		  <th></th>
+		</tr>
+		{% for show in showings %}
+		<tr>
+			<form action="/updateshowing" method="post">
+				<input type="hidden" name="idShowing" value="{{ show.0 }}">
+				<th><input type="text" name="ShowingDateTime" value="{{ show.1 }}"></th>
+				<th><input type="text" name="Movie_idMovie" value="{{ show.2 }}"></th>
+				<th><input type="text" name="TheatreRoom" value="{{ show.3 }}"></th>
+				<th><input type="text" name="Price" value="{{ show.4 }}"></th>
+				<th><input type="submit" value="Update"></th>
+			</form>
+		{% endfor %}
+		</tr>
+	  </table>
+	  </div>
+        <div class="col-md-4">
+          <table class="table table-bordered">
+		<tr>
+			<th>MovieID</th>
+			<th>MovieTitle</th>
+		</tr>
+		{% for movie in movies %}
+		<tr>
+			<th style="padding: 1px; font-size:80%;">{{ movie.0 }}</th>
+			<th style="padding: 1px; font-size:80%;">{{ movie.1 }}</th>
+		{% endfor %}
+		</tr>
+	  </table>
+	  </div>
+	  
+        <div class="col-md-4">
+          <table class="table table-bordered">
+		<tr>
+			<th>TheatreRoomNumber</th>
+			<th>Capacity</th>
+		</tr>
+		{% for room in rooms %}
+		<tr>
+			<th style="padding: 1px; font-size:80%;">{{ room.0 }}</th>
+			<th style="padding: 1px; font-size:80%;">{{ room.1 }}</th>
+		{% endfor %}
+		</tr>
+	  </table>
+	  </div>
+	  </div>
+	</div>
+	
+	<div id="deleteShowings">
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back To Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+			<li><a href="/listshowings">List Showings</a></li>
+			<li><a href="/addshowing">Add Showing</a></li>
+			<li><a href="/editshowing">Edit Showing</a></li>
+			<li class="active"><a href="/deleteshowing">Delete Showing</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	
+	<div class="page-header" style="margin-left:80px;">
+		<h1>Delete Showing</h1>
+	  </div>
+	<div class="row" style="margin-left:10px;">
+	<div class="col-md-7" style="margin-left:200px;">
+	<table class="table table-bordered">
+		<tr>
+		  <th>MovieID</th>
+		  <th>Movie Title</th>
+		  <th>TheatreRoomNumber</th>
+		  <th>ShowingID</th>
+		  <th>ShowingDateTime</th>
+		  <th>Price</th>
+		  <th></th>
+		</tr>
+		{% for show in showings %}
+		<tr>
+		  <th>{{ show.0 }}</th>
+		  <th>{{ show.1 }}</th>
+		  <th>{{ show.2 }}</th>
+		  <th>{{ show.3 }}</th>
+		  <th>{{ show.4 }}</th>
+		  <th>${{ show.5 }}</th>
+		  <th>
+		    <form action="/removeshowing" method="post">
+            <input type="hidden" name="idShowing" value="{{ show.3 }}">
+			<input type="hidden" name="Movie_idMovie" value="{{ show.0}}">		  
+		    <input type="submit" value="Delete">
+		    </form>
+		  </th>
+		{% endfor %}
+		</tr>
+	</table>
+	</div>
+   </div>
+   </div>
+	
+	<div id="listShowings">
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/manager">Back To Worker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+			<li class="active"><a href="/listshowings">List Showings</a></li>
+			<li><a href="/addshowing">Add Showing</a></li>
+			<li><a href="/editshowing">Edit Showing</a></li>
+			<li><a href="/deleteshowing">Delete Showing</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br /><br />
+	
+	<div class="page-header" style="margin-left:80px;">
+		<h1>List of All Showing</h1>
+	  </div>
+	
+	<div> 
+	<div class="row" style="margin-left:10px;">
+	<div class="col-md-10" style="margin-left:100px;">
+	<table class="table table-bordered">
+		<tr>
+		  <th>MovieID</th>
+		  <th>Movie Title</th>
+		  <th>TheatreRoomNumber</th>
+		  <th>ShowingID</th>
+		  <th>ShowingDateTime</th>
+		  <th>Price</th>
+		</tr>
+		{% for show in showings %}
+		<tr>
+		  <th>{{ show.0 }}</th>
+		  <th>{{ show.1 }}</th>
+		  <th>{{ show.2 }}</th>
+		  <th>{{ show.3 }}</th>
+		  <th>{{ show.4 }}</th>
+		  <th>${{ show.5 }}</th>
+		{% endfor %}
+		</tr>
+	</table>
+	</div>
+   </div>
+	</div>
+	</div>
+	
+	<div id="showsTime">
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">Back to Movie Theatre</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/login">Login</a></li>
+						<li><a href="/nowplaying">Now Playing</a></li>
+						<li class="active"><a href="/showtime">Show Time</a></li>
+						<li><a href="/manager">Manager</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</nav><br /><br /><br />
+	
+	<div class="page-header" style="margin-left:80px;">
+		<h1>Show Time</h1>
+	  </div>
+	 
+	<div class="row" style="margin-left:10px;">
+	<div class="col-md-10" style="margin-left:100px;">
+	<table class="table table-bordered">
+		<tr>
+		  <th>MovieID</th>
+		  <th>Movie Title</th>
+		  <th>TheatreRoomNumber</th>
+		  <th>ShowingID</th>
+		  <th>ShowingDateTime</th>
+		  <th>Price</th>
+		</tr>
+		{% for show in showings %}
+		<tr>
+		  <th>{{ show.0 }}</th>
+		  <th>{{ show.1 }}</th>
+		  <th>{{ show.2 }}</th>
+		  <th>{{ show.3 }}</th>
+		  <th>{{ show.4 }}</th>
+		  <th>${{ show.5 }}</th>
+		{% endfor %}
+		</tr>
+	</table>
+	</div>
+   </div>
+	</div>
+	
+ </body>
+ </html>
